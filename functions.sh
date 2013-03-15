@@ -59,6 +59,27 @@ function run_ant() # $1 = Directory, $2 = Target
     cd ..
 }
 
+## run the maven command 
+function run_maven() # $1 = Directory, $2 = Target
+{
+    cd $1
+    echo -ne "Building using Maven: "
+    mvn $2 > /dev/null 2> /dev/null
+    if [ "$?" = "0" ]; then echo "OK"; else echo "FAILURE"; fi
+    cd ..
+}
+
+## check directory existence
+function exists_directory() {
+    cd $1
+    echo -ne "Checking existence of $3 [$2]: "
+    if [ -d $2 ]; then echo "OK"; else echo "FAILURE"; fi
+    cd ..
+}
+
+
+
+
 
 ## Call the "handle_project_repository" function (to be defined) for each
 ## known project (in repositories.data.txt)
