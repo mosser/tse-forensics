@@ -77,7 +77,14 @@ function exists_directory() {
     cd ..
 }
 
-
+## check if a given string is used as tag in an XML file
+function xml_file_contains() { # $1 = Dir, $2 = File, $3 = TagName, $4 = content
+    cd $1
+    echo -ne "Tag content [$3] in $2 (expects $4): "
+    cat $2 | grep "<$3>[[:space:]]*$4[[:space:]]*</$3>" > /dev/null 2> /dev/null
+    if [ "$?" = "0" ]; then echo "OK"; else echo "FAILURE"; fi
+    cd ..
+}
 
 
 
